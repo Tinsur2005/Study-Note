@@ -6,10 +6,7 @@
   *   [常见问题的解决方法.md](JavaSE\常见问题的解决方法.md) 
 * Linux
   *  [1-Linux常见指令.md](Linux\1-Linux常见指令.md) 
-  *   [2-Docker入门.md](Linux\2-Docker入门.md) 
-* Linux
-  *  [1-Linux常见指令.md](Linux\1-Linux常见指令.md) 
-  *   [2-Docker入门.md](Linux\2-Docker入门.md) 
+  *   [2-Docker入门.md](Linux\2-Docker入门.md)
 
 
 
