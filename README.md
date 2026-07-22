@@ -1,3 +1,13 @@
 # Hello World！
 
 此处记录学习笔记，请通过左侧导航栏访问笔记
+
+笔记均为自行整理，整理不易，禁止任何形式的转载
+
+如有误可通过[留言反馈](https://www.tinsur.cn/about)，亦或通过下面公布的联系方式联系我。
+
+联系方式：
+
+Email：server@tinsur.cn
+
+博客：[www.tinsur.cn](https://www.tinsur.cn/)
