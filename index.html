@@ -38,12 +38,11 @@
             mergeNavbar: true,
             auto2top: true, // 路由切换自动滚动到页面顶部
 
-            // 路由别名，解决子目录 _sidebar.md / _navbar.md 404
+            // ========== 新增核心配置：路由别名，解决子目录404 ==========
             alias: {
                 '/.*/_sidebar.md': '/_sidebar.md',
                 '/.*/_navbar.md': '/_navbar.md'
             },
-            relativePath: true,
 
             search: {
                 maxAge: 86400000,// 过期时间，单位毫秒，默认一天
@@ -59,19 +58,10 @@
             }
         };
 
-        // 注册插件
+        // 注册插件，放在配置下方更规范
         window.$docsify.plugins = [
             function (hook) {
-                hook.doneEach(() => {
-                    addIcpFooter();
-                    // ========== 新增：图片路径自动修正 ==========
-                    document.querySelectorAll('.content img').forEach(img => {
-                        const src = img.getAttribute('src');
-                        if (src && src.startsWith('/assets/')) {
-                            img.setAttribute('src', '/note' + src);
-                        }
-                    });
-                });
+                hook.doneEach(() => addIcpFooter());
             }
         ];
     </script>
