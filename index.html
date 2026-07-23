@@ -43,7 +43,6 @@
                 '/.*/_sidebar.md': '/_sidebar.md',
                 '/.*/_navbar.md': '/_navbar.md'
             },
-            // 开启相对路径以md物理文件路径为基准，修复图片 ../ 路径解析错乱
             relativePath: true,
 
             search: {
@@ -60,10 +59,19 @@
             }
         };
 
-        // 注册插件，放在配置下方更规范
+        // 注册插件
         window.$docsify.plugins = [
             function (hook) {
-                hook.doneEach(() => addIcpFooter());
+                hook.doneEach(() => {
+                    addIcpFooter();
+                    // ========== 新增：图片路径自动修正 ==========
+                    document.querySelectorAll('.content img').forEach(img => {
+                        const src = img.getAttribute('src');
+                        if (src && src.startsWith('/assets/')) {
+                            img.setAttribute('src', '/note' + src);
+                        }
+                    });
+                });
             }
         ];
     </script>
