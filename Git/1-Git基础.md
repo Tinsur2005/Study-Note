@@ -71,7 +71,7 @@ git checkout file
 恢复某个目录下面所有文件：
 
 ```bash
-git checkout [目录]
+git checkout 目录
 ```
 
 ### 3、更多操作
