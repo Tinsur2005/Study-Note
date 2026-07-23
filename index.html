@@ -127,6 +127,21 @@
         setInterval(fixSearchResult, 350);
     </script>
     <!--解除中文编码问题 结束-->
+
+
+     <script>
+        // 拦截多余的 _sidebar/_navbar 探测请求
+        const originFetch = window.fetch;
+        window.fetch = function(url, opts) {
+        // 匹配 /xxx/_sidebar.md 、/xxx/_navbar.md 这类子目录探测
+        const reg = /\/[^/]+\/(_sidebar\.md|_navbar\.md)$/;
+        if(reg.test(url)) {
+            // 直接拒绝发起请求，模拟不存在，不再出现404日志
+            return Promise.reject('block detect');
+        }
+        return originFetch(url, opts);
+        }
+    </script>
 </body>
 
 </html>
