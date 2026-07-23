@@ -38,11 +38,13 @@
             mergeNavbar: true,
             auto2top: true, // 路由切换自动滚动到页面顶部
 
-            // ========== 新增核心配置：路由别名，解决子目录404 ==========
+            // 路由别名，解决子目录 _sidebar.md / _navbar.md 404
             alias: {
                 '/.*/_sidebar.md': '/_sidebar.md',
                 '/.*/_navbar.md': '/_navbar.md'
             },
+            // 开启相对路径以md物理文件路径为基准，修复图片 ../ 路径解析错乱
+            relativePath: true,
 
             search: {
                 maxAge: 86400000,// 过期时间，单位毫秒，默认一天
