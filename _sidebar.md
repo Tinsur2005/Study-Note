@@ -13,5 +13,5 @@
 * Git
   *  [1-Git基础.md](note/Git/1-Git基础.md) 
 * 生产力工具
-  - [ClaudeCode安装及使用](https://www.tinsur.cn/610.html)
+  - :link:[ClaudeCode安装及使用](https://www.tinsur.cn/610.html)
 
