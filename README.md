@@ -6,7 +6,7 @@
 
 **联系方式：**
 
-Email：server@tinsur.cn
+Email：me@tinsur.cn
 
 博客：[www.tinsur.cn](https://www.tinsur.cn/)
 
@@ -14,7 +14,7 @@ Email：server@tinsur.cn
 
 
 
-项目架构：
+**架构：**
 
 ```bash
 study-note/
