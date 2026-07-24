@@ -13,6 +13,6 @@
 * Git
   *  [1-Git基础.md](note/Git/1-Git基础.md) 
 * 生产力工具
-  - [1-ClaudeCode安装及使用.md↗](https://www.tinsur.cn/610.html)
+  - [1-ClaudeCode安装及使用↗](https://www.tinsur.cn/610.html)
   -  [2-Markdown语法指南.md](note/Productivity/2-markdown.md) 
 
