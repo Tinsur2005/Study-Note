@@ -11,3 +11,27 @@ Email：server@tinsur.cn
 博客：[www.tinsur.cn](https://www.tinsur.cn/)
 
 关于我/留言板：[tinsur.cn/about](https://www.tinsur.cn/about)
+
+
+
+项目架构：
+
+```bash
+study-note/
+├── index.html              # 入口文件
+├── _sidebar.md             # 侧边栏目录
+├── _navbar.md              # 顶部导航
+├── README.md               # 仓库介绍
+├── note/                   # 笔记文件（所有笔记均在此目录下）
+│   ├── assets				# 图片等资源文件目录
+│   ├── Git					# 笔记分类目录
+│   ├── JavaSE	
+│       ├── 1-Java介绍.md	  # 笔记文件
+│  	    └── ...
+│   ├── Linux
+│   └── ...
+├── js/                 	# 自定义JS
+├── css/                 	# 自定义CSS
+└── .gitignore
+```
+
