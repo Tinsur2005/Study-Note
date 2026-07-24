@@ -1,39 +1,15 @@
 # Hello World！
 
-此处记录个人学习笔记，请通过左侧导航栏访问所有笔记，其他文章可[访问博客](https://www.tinsur.cn/)查看；
+:pencil:此处记录个人学习笔记，请通过左侧导航栏访问所有笔记，其他文章可[访问博客(www.tinsur.cn)](https://www.tinsur.cn/)查看。
 
-部分笔记已在博客发布，此种情况的会在导航栏中标注 `↗` 图标，并提供超链跳转到博客的对应文章。
+如是在 **Github / Gitee** 处访问此页面，请[点击此处进入站点(note.tinsur.cn)](https://note.tinsur.cn/)；
 
-笔记均为自行整理，如部分笔记有误可[提交issue](https://github.com/Tinsur2005/Study-Note/issues)，或通过下面公布的**联系方式**联系我。
+部分笔记会在博客发布，为避免重复将不再显示在笔记内，此种情况会在左侧导航栏提供**超链接**跳转到博客的对应文章，并标注 `↗` 图标；
+
+笔记均为自行整理，如部分笔记有误可提交issue（ [Github](https://github.com/Tinsur2005/Study-Note/issues) | [Gitee](https://gitee.com/tinsur/study-note/issues) ），或通过下面公布的**联系方式**联系我。
 
 **联系方式：**
 
 Email：me@tinsur.cn
 
-博客：[www.tinsur.cn](https://www.tinsur.cn/)
-
 关于我/留言板：[tinsur.cn/about](https://www.tinsur.cn/about)
-
-
-
-**架构：**
-
-```bash
-study-note/
-├── index.html              # 入口文件
-├── _sidebar.md             # 侧边栏目录
-├── _navbar.md              # 顶部导航
-├── README.md               # 仓库介绍
-├── note/                   # 笔记文件（所有笔记均在此目录下）
-│   ├── assets				# 图片等资源文件目录
-│   ├── Git					# 笔记分类目录
-│   ├── JavaSE	
-│       ├── 1-Java介绍.md	  # 笔记文件
-│  	    └── ...
-│   ├── Linux
-│   └── ...
-├── js/                 	# 自定义JS
-├── css/                 	# 自定义CSS
-└── .gitignore
-```
-
