@@ -380,10 +380,6 @@ user@example.com
 
 语法:`![图片描述](图片地址 "可选标题")`
 
-#### 演示效果
-
-![Markdown Logo](https://markdown.com.cn/images/markdown-logo.png "Markdown Logo")
-
 #### 源码对照
 
 ```markdown
@@ -391,12 +387,6 @@ user@example.com
 ```
 
 ### 2. 参考式图片
-
-#### 演示效果
-
-![Markdown Logo][logo]
-
-[logo]: https://markdown.com.cn/images/markdown-logo.png "Markdown Logo"
 
 #### 源码对照
 
@@ -409,10 +399,6 @@ user@example.com
 ### 3. 带链接的图片
 
 将图片语法放在链接语法的方括号部分即可。
-
-#### 演示效果
-
-[![Markdown Logo](https://markdown.com.cn/images/markdown-logo.png)](https://markdown.com.cn)
 
 #### 源码对照
 
@@ -672,25 +658,15 @@ Markdown 使用反斜杠 `\` 转义特殊字符,使其显示为普通字符。
 
 块级公式:
 
-$$
-\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
-$$
+![image-20260724212940151](./../assets/2-markdown/image-20260724212940151.png)
 
 矩阵:
 
-$$
-\begin{bmatrix}
-1 & 2 & 3 \\
-4 & 5 & 6 \\
-7 & 8 & 9
-\end{bmatrix}
-$$
+![image-20260724212949675](./../assets/2-markdown/image-20260724212949675.png)
 
 求和与积分:
 
-$$
-\sum_{i=1}^{n} i = \frac{n(n+1)}{2}, \quad \int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
-$$
+![image-20260724212957733](./../assets/2-markdown/image-20260724212957733.png)
 
 ### 源码对照
 
