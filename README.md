@@ -1,6 +1,6 @@
 # Hello World！
 
-:p此处记录个人学习笔记，请通过左侧导航栏访问所有笔记，其他文章可[访问博客](https://www.tinsur.cn/)查看。
+:pencil:此处记录个人学习笔记，请通过左侧导航栏访问所有笔记，其他文章可[访问博客](https://www.tinsur.cn/)查看。
 
 如是在 **Github / Gitee** 处访问此页面，请[点击此处进入笔记站](https://note.tinsur.cn/)；
 
