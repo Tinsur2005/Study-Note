@@ -10,6 +10,8 @@
   *  [7-包装数据类型.md](note/JavaSE/7-包装数据类型.md) 
   *  [8-集合框架.md](note/JavaSE/8-集合框架.md) 
   *  [常见问题的解决方法.md](note/JavaSE/常见问题的解决方法.md) 
+* 数据库
+  *  [1-数据库基础.md](note/Database/1-数据库基础.md) 
 * Linux
   *  [1-Linux常见指令.md](note/Linux/1-Linux常见指令.md) 
   *  [2-Docker入门.md](note/Linux/2-Docker入门.md) 
