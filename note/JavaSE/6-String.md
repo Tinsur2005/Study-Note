@@ -145,6 +145,7 @@ System.out.println(str);
 1. StringBuilder、StringBuffer 底层是可变字符数组，修改不会生成新对象
 2. 两者常用方法一致：`append()`拼接、`delete()`删除、`insert()`插入、`reverse()`反转
 3. 日常开发**单线程优先用 StringBuilder**，性能最优
+4. Java对**字符串常量**拼接有优化，使用String。`String str = "Java" + "Python" + "UI" + "C++"; `
 
 
 ```java
