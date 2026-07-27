@@ -16,7 +16,7 @@ String 是 Java 中最常用的**引用类型**
 
 ## 二、String 的两种创建方式
 
-### 1.直接赋值
+### 2.1 直接赋值
 
 ```java
 String str = "abc";
@@ -26,7 +26,7 @@ String str = "abc";
 - 存在：直接返回常量池中的对象地址**（复用常量池对象）**
 - 不存在：在常量池中创建该字符串对象，再返回地址
 
-### 2.New关键字创建
+### 2.2 New关键字创建
 
 ```java
 String str = new String("abc");
@@ -38,7 +38,7 @@ String str = new String("abc");
 - 无论常量池是否存在，都会**在堆内存中新建一个 String 对象**，不存在常量池复用
 - 变量 str 指向堆内存的对象，堆对象再指向常量池的字符串
 
-### 3.两种方法的区别
+### 2.3 两种方法的区别
 
 ```java
 String s1 = "abc";
@@ -52,18 +52,18 @@ System.out.println(s1.equals(s2)); // true
 
 ## 三、String 不可变性
 
-### 1. 不可变定义
+### 3.1 不可变定义
 
 字符串对象**一旦初始化，内部字符序列无法被修改**，所有修改、拼接、替换操作，都不会改变原字符串，只会生成**新的 String 对象**。
 
-### 2. 不可变原因
+### 3.2 不可变原因
 
 - 底层字符数组 `value` 被 **private final** 修饰
 - private：外部无法直接访问数组
 - final：数组引用地址不可修改，无法重新赋值数组
 - String 内部未提供修改字符数组的方法，彻底杜绝修改可能
 
-### 3. 代码验证不可变性
+### 3.3 代码验证不可变性
 
 ```java
 String str = "hello";
@@ -73,7 +73,7 @@ System.out.println(str);
 
 **原理：**代码看似修改了 str，实则原 "hello" 不变，JVM 新建 "hello world" 字符串，**让 str 指向新对象**，原对象等待垃圾回收。
 
-### 4. 不可变性的优缺点
+### 3.4 不可变性的优缺点
 
 **优点**：
 
@@ -89,7 +89,7 @@ System.out.println(str);
 
 **注意：所有方法均不会修改原字符串，只会返回新字符串。**
 
-### 1. 获取长度与字符
+### 4.1 获取长度与字符
 
 - `length()`：返回字符串长度
 - `charAt(int index)`：返回指定下标字符
@@ -97,7 +97,7 @@ System.out.println(str);
 - `indexOf(String str , int fromIndex)`：返回子串在fromIndex后面首次出现的下标，无则返回-1
 - `lastIndexOf(String str)`：返回子串最后出现下标
 
-### 2. 字符串判断
+### 4.2 字符串判断
 
 - `equals(Object obj)`：比较内容是否相同（区分大小写）
 - `equalsIgnoreCase(String str)`：忽略大小写比较内容
@@ -107,13 +107,13 @@ System.out.println(str);
 - `endsWith(String suffix)`：判断是否以指定后缀结尾
 - `contains(CharSequence s)`：判断是否包含指定子串
 
-### 3. 字符串截取与分割
+### 4.3 字符串截取与分割
 
 - `substring(int beginIndex)`：从指定下标截取到末尾
 - `substring(int begin, int end)`：**左闭右开**区间截取
 - `split(String regex)`：根据正则表达式分割字符串，返回数组
 
-### 4. 转换与替换
+### 4.4 转换与替换
 
 - `toLowerCase()`：转小写
 - `toUpperCase()`：转大写
@@ -121,7 +121,7 @@ System.out.println(str);
 - `replace(char old, char new)`：替换所有指定字符
 - `replaceAll(String regex, String newStr)`：正则替换所有子串
 
-### 5. 类型转换
+### 4.5 类型转换
 
 - `toCharArray()`：字符串转字符数组
 - `String.valueOf(任意数据类型)`：任意类型转字符串

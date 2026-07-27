@@ -42,7 +42,7 @@ Docker 的C/S客户端-服务端架构（如图）：用户在客户端 docker-c
 4. `docker rmi` 删除镜像，这个i就是image的意思
 5. `docker rm` 删除容器  `docker rm -f` 可以强制删除正在运行的容器
 
-### 1、Docker主机、客户端、应用市场
+### 2.1 Docker主机、客户端、应用市场
 
 首先要在电脑上安装**Docker环境**，安装了**Docker环境**的机器叫**Docker主机**，又叫**Docker Host**，安装了Docker后，Docker的后台进程**DockerDaemon**就会一直运行，时刻准备服务；
 
@@ -50,7 +50,7 @@ Docker还提供了一个客户端**docker-cli**用来操作Docker主机的后台
 
 Docker还有一个**应用市场**，应用市场中的软件叫做**镜像**。
 
-### 2、镜像、容器、镜像仓库
+### 2.2 镜像、容器、镜像仓库
 
 **镜像：**将应用所需的函数库、依赖、配置等与应用一起打包得到的就是镜像
 
@@ -64,7 +64,7 @@ DockerHub网站是官方仓库，阿里云、华为云会提供一些第三方�
 
 ## 三、安装Docker
 
-### 1、配置Docker的yum库
+### 3.1 配置Docker的yum库
 
 **YUM**是CentOS/RHEL系列Linux的软件包管理工具，可以`自动下载`安装软件并解决依赖关系。
 
@@ -78,7 +78,7 @@ sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
 
-### 2、安装Docker
+### 3.2 安装Docker
 
 执行以下命令安装Docker：
 
@@ -88,7 +88,7 @@ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 
 可以使用`docker -v`查看是否安装成功
 
-### 3、启动Docker
+### 3.3 启动Docker
 
 目前无法连接到Docker的守护进程，Docker本身也是一个服务，需要启动起来一直运行；
 
@@ -105,7 +105,7 @@ systemctl restart docker
 systemctl enable docker --now
 ```
 
-### 4、配置镜像加速
+### 3.4 配置镜像加速
 
 默认的DockerHub下载速度比较慢，可以配置国内镜像地址，镜像地址可能会失效或变更。
 
@@ -124,7 +124,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
-### 5、卸载Docker
+### 3.5 卸载Docker
 
 可使用以下命令卸载Docker：
 

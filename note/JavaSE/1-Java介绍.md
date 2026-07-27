@@ -20,11 +20,11 @@ Java的程序跑在**JVM（Java虚拟机）**上，Java通过JVM实现跨平台�
 
 ## 二、关键字、标识符（变量）
 
-### 1、关键字
+### 2.1 关键字
 
 **关键字**，即Java保留有特殊用途个关键字，如 **public、static、void** 等
 
-### 2、标识符（变量）
+### 2.2 标识符（变量）
 
 变量，英文Variable
 
@@ -50,7 +50,7 @@ Java语言是**强类型语言**，对于每一种数据都定义了明确的具
 
 ![image-20260721204447689](./../assets/1-Java%E4%BB%8B%E7%BB%8D/image-20260721204447689.png)
 
-### 1、基本数据类型
+### 3.1 基本数据类型
 
 Java中有**八个**基本数据类型，包括**byte、short、int、long、float、double、char、boolean**，其中**byte、short、int、long**属于数值型，**float和double**属于浮点类型，**char**是字符型，**boolean**是布尔型。
 
@@ -82,7 +82,7 @@ Java中有**八个**基本数据类型，包括**byte、short、int、long、flo
 
 每个字符在`ASCII`编码表里面都对应一个`int`整数
 
-### 2、数据类型转换
+### 3.2 数据类型转换
 
 数据类型转换原则：
 
@@ -100,7 +100,7 @@ Java中有**八个**基本数据类型，包括**byte、short、int、long、flo
 	System.out.println((char)(ch+2));//c
 ```
 
-### 3、运算符
+### 3.3 运算符
 
 #### （1）基本运算符
 
