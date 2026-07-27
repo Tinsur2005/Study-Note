@@ -7,6 +7,7 @@
   *  [4-面向对象基础.md](note/JavaSE/4-面向对象基础.md) 
   *  [5-面向对象进阶.md](note/JavaSE/5-面向对象进阶.md) 
   *  [6-String.md](note/JavaSE/6-String.md) 
+  *  [7-包装数据类型.md](note/JavaSE/7-包装数据类型.md) 
   *  [常见问题的解决方法.md](note/JavaSE/常见问题的解决方法.md) 
 * Linux
   *  [1-Linux常见指令.md](note/Linux/1-Linux常见指令.md) 
