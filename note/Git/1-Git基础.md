@@ -95,7 +95,46 @@ git push origin master:master
 # master:master中，左边代表本地仓库的master，右侧代表远程仓库的master
 ```
 
-## 四、问题解决
+## 四、.gitignore
+
+`.gitignore` 是 Git 的配置文件，用来**指定哪些文件 / 目录不需要被 Git 追踪（提交到版本库）**。
+
+放在项目根目录，Git 自动识别；文件名**必须是 `.gitignore`（开头带点，无后缀）**。
+
+> ⚠️ 注意：
+>
+> 如果文件**已经被 git 追踪（已经 add/commit 过）**，后续写入.gitignore 不会自动忽略！需要手动清除缓存。
+
+```.gitignore
+# 以 # 开头代表注释
+# 忽略单个文件
+test.txt
+
+# 忽略所有后缀 .log 的文件
+*.log
+
+# 忽略名称为 build 的文件夹（匹配目录）
+build/
+
+# 忽略目录下所有文件，但不匹配同名文件
+dist/
+
+# ! 取反：不忽略（例外规则）
+# 忽略所有txt，但保留 readme.txt
+*.txt
+!readme.txt
+
+# ? 匹配单个任意字符
+test?.txt
+
+# ** 递归匹配多层目录
+**/node_modules/     # 任意层级下的node_modules文件夹
+
+# / 开头：只匹配根目录下文件
+/temp.txt   # 只忽略项目根目录temp.txt，子目录temp.txt不忽略
+```
+
+## 五、问题解决
 
 ### 解决控制台中文乱码问题
 
