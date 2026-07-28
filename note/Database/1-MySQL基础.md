@@ -321,7 +321,63 @@ FROM student GROUP BY gender HAVING COUNT(*)>1;
 2. WHERE 过滤单条数据（分组前），HAVING 过滤分组结果（分组后）
 3. 分组字段为NULL的数据，会单独归为一个分组
 
-### 2.7 字段属性设置
+#### 7. 分页查询 LIMIT
+
+LIMIT 是 MySQL 专属分页语句，用于限制查询结果返回条数，**必须放在整条SQL语句的最后执行**，优先级最低。
+
+##### 1. 整语法格式
+
+```sql
+-- 格式1：只写一个参数 = 展示前N条数据
+SELECT 字段 FROM 表名 LIMIT 条数;
+
+-- 格式2：写两个参数 = 偏移量, 展示条数（标准分页语法）
+SELECT 字段 FROM 表名 LIMIT 偏移量, 条数;
+```
+
+##### 2. 参数详细解析
+
+- **第一个参数（偏移量 offset）**：跳过前多少条数据，默认从0开始
+- **第二个参数（条数 size）**：最终查询、返回的数据行数
+
+##### 3. 通用分页公式（开发常用）
+
+已知：页码 page、每页条数 pageSize
+
+**偏移量 = (页码 - 1) \* 每页条数**
+
+```sql
+-- 示例：第1页，每页3条
+SELECT * FROM goods ORDER BY market_price DESC LIMIT 0,3;
+
+-- 示例：第2页，每页3条（跳过前3条，取3条）
+SELECT * FROM goods ORDER BY market_price DESC LIMIT 3,3;
+
+-- 示例：第3页，每页3条
+SELECT * FROM goods ORDER BY market_price DESC LIMIT 6,3;
+```
+
+##### 4. LIMIT 搭配各类查询实操案例
+
+```sql
+-- 1. 基础查询+分页：查询前5条学生数据
+SELECT id,name,age FROM student LIMIT 5;
+
+-- 2. 排序+分页（高频组合）：价格最高的前3件商品
+SELECT * FROM goods ORDER BY market_price DESC LIMIT 0,3;
+
+-- 3. 条件+排序+分页：点击量前5的手机商品
+SELECT * FROM goods WHERE cat_id=3 ORDER BY click_count DESC LIMIT 5;
+
+-- 4. 分组+排序+分页：统计各班级人数，取人数最多的前2个班级
+SELECT banji_id,COUNT(*) AS 人数 
+FROM student 
+GROUP BY banji_id 
+ORDER BY 人数 DESC 
+LIMIT 2;
+```
+
+### 2.8 字段属性设置
 
 - **NOT NULL**：字段非空，禁止存入NULL值
 - **AUTO_INCREMENT**：int字段自增，必须配合主键/唯一键使用
