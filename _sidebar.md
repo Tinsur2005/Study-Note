@@ -9,6 +9,7 @@
   *  [6-String.md](note/JavaSE/6-String.md) 
   *  [7-包装数据类型.md](note/JavaSE/7-包装数据类型.md) 
   *  [8-集合框架.md](note/JavaSE/8-集合框架.md) 
+  *  [9-异常.md](note/JavaSE/9-异常.md) 
   *  [常见问题的解决方法.md](note/JavaSE/常见问题的解决方法.md) 
 * 数据库
   *   [1-MySQL基础.md](note/Database/1-MySQL基础.md) 
