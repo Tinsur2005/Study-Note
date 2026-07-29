@@ -12,6 +12,7 @@
   *  [常见问题的解决方法.md](note/JavaSE/常见问题的解决方法.md) 
 * 数据库
   *   [1-MySQL基础.md](note/Database/1-MySQL基础.md) 
+  *   [2-常用聚合函数.md](note/Database/2-常用聚合函数.md) 
 * Linux
   *  [1-Linux常见指令.md](note/Linux/1-Linux常见指令.md) 
   *  [2-Docker入门.md](note/Linux/2-Docker入门.md) 
