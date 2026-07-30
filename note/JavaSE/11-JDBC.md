@@ -464,7 +464,7 @@ public void testLike() {
 }
 ```
 
-## 四、Statement 与 PreparedStatement 核心区别
+## 四、Statement与PreparedStatement的区别
 
 `PreparedStatement`（预编译执行对象）是 `Statement` 的升级版，实际开发中**优先使用 PreparedStatement**。
 
@@ -475,7 +475,7 @@ public void testLike() {
 | 执行性能          | 每次执行 SQL 都会重新编译，效率低 | SQL 仅预编译一次，可多次复用参数，循环场景效率极高 |
 | 代码可读性        | 拼接代码混乱，易出错              | 结构清晰，参数单独赋值，便于维护                   |
 
-### 4.1 SQL 注入漏洞演示（Statement 弊端）
+### 4.1 SQL 注入漏洞演示
 
 #### 1. 测试表创建语句
 
