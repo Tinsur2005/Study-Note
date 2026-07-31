@@ -16,12 +16,13 @@
 * 数据库
   *   [1-MySQL基础.md](note/Database/1-MySQL基础.md) 
   *   [2-常用聚合函数.md](note/Database/2-常用聚合函数.md) 
+* Web
+  - [1-HTML.md](note/Web/1-html.md) 
+  - [2-CSS.md](note/Web/2-css.md) 
+  - [3-JavaScript.md](note\Web\3-JavaScript.md) 
 * Linux
   *  [1-Linux常见指令.md](note/Linux/1-Linux常见指令.md) 
   *  [2-Docker入门.md](note/Linux/2-Docker入门.md) 
-* Web
-  - [1-html.md](note/Web/1-html.md) 
-  - [2-css.md](note/Web/2-css.md) 
 * Git
   *  [1-Git基础.md](note/Git/1-Git基础.md) 
 * 生产力工具
