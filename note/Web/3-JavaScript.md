@@ -74,7 +74,7 @@ var score=96.5; //浮点数
 var string1="This is a string";
 ```
 
-> - 统一使用 `var`或者`let`声明变量，声明阶段变量无类型
+> - 统一使用 `let`或者`let`声明变量，声明阶段变量无类型
 > - **变量的类型由赋值的值决定**，赋值后确定数据类型
 
 ### 2.2 null 与 undefined 区别
@@ -129,7 +129,7 @@ var string1="This is a string";
 
 ```javascript
 <script type="text/javascript">
-    var m = '3'; // 字符串类型
+    let m = '3'; // 字符串类型
     let n = 3;   // 数字类型
 
     if (m == n) {
@@ -145,8 +145,8 @@ var string1="This is a string";
 
 ### 4.1 字符串创建方式
 
-- 字面量创建（常用）：`var str1 = 'hello js!';`
-- 对象创建：`var str2 = new String('hello js!');`
+- 字面量创建（常用）：`let str1 = 'hello js!';`
+- 对象创建：`let str2 = new String('hello js!');`
 
 ### 4.2 核心属性
 
@@ -162,7 +162,7 @@ var string1="This is a string";
 - `toUpperCase()`：全部转为大写
 
 ```javascript
-var str = 'Hello jS!';
+let str = 'Hello jS!';
 console.log(str.toLowerCase());//hello js!
 console.log(str.toUpperCase());//HELLO JS！
 ```
@@ -188,13 +188,13 @@ console.log(str.toUpperCase());//HELLO JS！
 
 ```javascript
 <script type="text/javascript">
-    var str1 = 'Hello JS and Java';
+    let str1 = 'Hello JS and Java';
     console.log(str1.indexOf('J'));//6
     console.log(str1.indexOf('JS'));//6
     console.log(str1.indexOf('JS', 9));//-1
 
-    var str2 = 'how are you doing today';
-    var array = str2.split(' ');
+    let str2 = 'how are you doing today';
+    let array = str2.split(' ');
     console.log(array);// 按空格分割的数组
     console.log(array[0]);//how
     console.log('1:2:3:4'.split(':'));//["1","2","3","4"]
@@ -244,7 +244,7 @@ let array1 = new Array();
 // 2. 创建指定长度空数组
 let array2 = new Array(7);
 // 3. 创建带初始值的数组
-var array3 = new Array(100, 'a', true);
+let array3 = new Array(100, 'a', true);
 // 4. 字面量创建（最常用）
 let array4 = [100, 200, 300];
 ```
@@ -263,7 +263,7 @@ let array4 = [100, 200, 300];
     let array1 = new Array(7);
     console.log(array1.length);//7
 
-    var array2 = new Array(100, 'abc', true);
+    let array2 = new Array(100, 'abc', true);
     console.log(array2.length);//3
 
     // 下标赋值
@@ -305,7 +305,7 @@ Math 是 JS 内置数学对象，无需手动创建，直接调用属性/方法
 
 ```javascript
 console.log(eval('2+3')) //5
-eval('var x=10;var y=20;console.log(x*y);'); //200
+eval('let x=10;let y=20;console.log(x*y);'); //200
 ```
 
 ## 九、JS 自定义对象
@@ -372,13 +372,13 @@ DOM（Document Object Model）：文档对象模型，是 **JS 与 HTML 标签�
     <script>
         function clickMe() {
             // 根据标签名获取元素集合
-            var array = document.getElementsByTagName('input');
+            let array = document.getElementsByTagName('input');
             console.log(array);
             console.log(array[0]);
             console.log(array[0].value);
 
             // 根据 id 获取单个元素
-            var inputObj = document.getElementById('inputId');
+            let inputObj = document.getElementById('inputId');
             console.log(inputObj.value);
         }
     </script>
@@ -438,16 +438,16 @@ DOM（Document Object Model）：文档对象模型，是 **JS 与 HTML 标签�
 <script type="text/javascript">
     // 方式1：eval 动态计算
     function cal(type) {
-        var num1 = document.getElementById('num1Id').value;
-        var num2 = document.getElementById('num2Id').value;
+        let num1 = document.getElementById('num1Id').value;
+        let num2 = document.getElementById('num2Id').value;
         let result = eval(parseInt(num1) + type + parseInt(num2));
         document.getElementById('resultId').value = result;
     }
 
     // 方式2：switch 分支计算
     function cal1(type) {
-        var num1 = parseInt(document.getElementById('num1Id').value);
-        var num2 = parseInt(document.getElementById('num2Id').value);
+        let num1 = parseInt(document.getElementById('num1Id').value);
+        let num2 = parseInt(document.getElementById('num2Id').value);
         let result = 0;
         switch (type) {
             case '+': result = num1 + num2; break;
@@ -460,23 +460,23 @@ DOM（Document Object Model）：文档对象模型，是 **JS 与 HTML 标签�
 
     // 方式3：单独函数计算
     function add() {
-        var num1 = parseInt(document.getElementById('num1Id').value);
-        var num2 = parseInt(document.getElementById('num2Id').value);
+        let num1 = parseInt(document.getElementById('num1Id').value);
+        let num2 = parseInt(document.getElementById('num2Id').value);
         document.getElementById('resultId').value = num1 + num2;
     }
     function sub() {
-        var num1 = parseInt(document.getElementById('num1Id').value);
-        var num2 = parseInt(document.getElementById('num2Id').value);
+        let num1 = parseInt(document.getElementById('num1Id').value);
+        let num2 = parseInt(document.getElementById('num2Id').value);
         document.getElementById('resultId').value = num1 - num2;
     }
     function mul() {
-        var num1 = parseInt(document.getElementById('num1Id').value);
-        var num2 = parseInt(document.getElementById('num2Id').value);
+        let num1 = parseInt(document.getElementById('num1Id').value);
+        let num2 = parseInt(document.getElementById('num2Id').value);
         document.getElementById('resultId').value = num1 * num2;
     }
     function div() {
-        var num1 = parseInt(document.getElementById('num1Id').value);
-        var num2 = parseInt(document.getElementById('num2Id').value);
+        let num1 = parseInt(document.getElementById('num1Id').value);
+        let num2 = parseInt(document.getElementById('num2Id').value);
         document.getElementById('resultId').value = num1 / num2;
     }
 </script>
@@ -506,7 +506,7 @@ DOM（Document Object Model）：文档对象模型，是 **JS 与 HTML 标签�
        
        <script type="text/javascript">
           function clickMe() {
-             var spanObj = document.getElementById('spanId');
+             let spanObj = document.getElementById('spanId');
              // innerText：直接显示标签文本
              // spanObj.innerText = '<h1 style="color: red;">innerText</h1>';
              // innerHTML：解析并渲染 h1 标签样式
@@ -555,14 +555,14 @@ window.onload = function() {
     <body>
        <script type="text/javascript">
           window.onload = function() {
-             var colors = ['red', 'green', 'blue'];
-             var colorMeans = ['热情', '冷静', '生机'];
+             let colors = ['red', 'green', 'blue'];
+             let colorMeans = ['热情', '冷静', '生机'];
              // 创建 ul 父节点
-             var ul = document.createElement('ul');
+             let ul = document.createElement('ul');
 
              // 循环创建 li 子节点
              for (let i = 0; i < colors.length; i++) {
-                var li = document.createElement('li');
+                let li = document.createElement('li');
                 li.setAttribute('mean', colorMeans[i]);
                 let textNode = document.createTextNode(colors[i]);
                 li.appendChild(textNode);
@@ -603,7 +603,7 @@ window.onload = function() {
 
 ```javascript
 <script>
-var btn = document.getElementById('btnId');
+let btn = document.getElementById('btnId');
 btn.onclick = function () {
     alert('JS 动态绑定事件触发');
 }
