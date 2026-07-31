@@ -1,4 +1,7 @@
 # Linux常用命令
+
+> 可使用  [Linux命令搜索引擎](https://tools.tinsur.cn/linux-cmd/index.html) 快速搜索Linux命令
+
 ## 一、目录结构
 
 ```bash
