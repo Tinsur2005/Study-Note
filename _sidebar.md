@@ -12,6 +12,7 @@
   *  [9-异常.md](note/JavaSE/9-异常.md) 
   *  [10-IO流.md](note/JavaSE/10-IO流.md) 
   *  [11-JDBC.md](note/JavaSE/11-JDBC.md) 
+  *  [12-可变参数和枚举.md](note/JavaSE/12-可变参数和枚举.md) 
   *  [常见问题的解决方法.md](note/JavaSE/常见问题的解决方法.md) 
 * 数据库
   *   [1-MySQL基础.md](note/Database/1-MySQL基础.md) 
