@@ -335,21 +335,63 @@ public String selectAll(Model model) {
 }
 ```
 
-**4. Thymeleaf 页面渲染示例**
+**4.HTML页面源码**
 
 ```html
 <!DOCTYPE html>
-学生列表编号姓名年龄性别<!-- 遍历后端传递的 list 集合 -->
-      
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap-3.4.1-dist/css/bootstrap.css"/>
+</head>
+<body>
+    <table class="table table-bordered table-condensed table-hover table-striped">
+        <tr>
+            <td>编号</td>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>性别</td>
+        </tr>
+        <tr th:each="student:${list}">
+            <td th:text="${student.id}"></td>
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.age}"></td>
+            <td th:text="${student.gender}"></td>
+        </tr>
+    </table>
+
+</body>
+</html>
 ```
 
 ## 六、请求方式、转发与重定向
 
-### 6.1 登录页面实战
+### 6.1 登录页面HTML
 
 ```html
 <!DOCTYPE html>
-用户登录<!-- 展示登录错误提示信息 -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+
+<div th:if="${errorMsg}" th:text="${errorMsg}" style="color:red;"></div>
+<form id="loginForm" method="get" action="/user/login">
+    <label for="name">用户名</label>
+    <input type="text" id="name" name="name"
+           placeholder="请输入用户名" required autofocus/>
+    <br>
+    <label for="password">密码</label>
+    <input type="password" id="password" name="password"
+           placeholder="请输入密码" required/>
+    <br>
+    <input type="submit" value="登录"/>
+</form>
+</body>
+</html>
 ```
 
 ### 6.2 登录控制器逻辑
@@ -649,7 +691,7 @@ Axios 官方地址：https://www.axios-http.cn
 
 ### 代码核心说明
 
-- **e.preventDefault()**：阻止表单默认整页刷新提交，是异步请求必备配置。
-- **URLSearchParams**：自动将参数封装为表单默认的 `application/x-www-form-urlencoded` 格式，后端可直接通过形参接收数据，无需额外解析。
-- **then 回调**：请求成功后执行，处理正常业务逻辑（页面跳转、提示信息）。
-- **catch 回调**：捕获网络异常、接口报错等问题，统一异常提示。
+- **e.preventDefault()：**阻止表单默认整页刷新提交，是异步请求必备配置。
+- **URLSearchParams：**自动将参数封装为表单默认的 `application/x-www-form-urlencoded` 格式，后端可直接通过形参接收数据，无需额外解析。
+- **then 回调：**请求成功后执行，处理正常业务逻辑（页面跳转、提示信息）。
+- **catch 回调：**捕获网络异常、接口报错等问题，统一异常提示。
