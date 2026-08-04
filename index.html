@@ -42,7 +42,7 @@
             mergeNavbar: true,
             auto2top: true, // 路由切换自动滚动到页面顶部
             nativeEmoji: true,   // 本地emoji支持
-
+            
             // ========== 新增核心配置：路由别名，解决子目录404 ==========
             alias: {
                 '/.*/_sidebar.md': '/_sidebar.md',
@@ -63,8 +63,28 @@
             }
         };
 
-        // 注册插件，放在配置下方更规范
+        // 合并插件数组：【WP登录拦截插件】 + 原有备案页脚插件
         window.$docsify.plugins = [
+            // 插件1：WP登录状态前置拦截
+            function (hook, vm) {
+                hook.beforeMount(async function () {
+                    const apiUrl = "https://www.tinsur.cn/auth-check";
+                    try {
+                        const res = await fetch(apiUrl, { credentials: "include" });
+                        const data = await res.json();
+                        // 未登录，跳转WP登录页，登录成功自动返回当前笔记页面
+                        if (data.status !== 1) {
+                            const backUrl = encodeURIComponent(window.location.href);
+                            window.location.href = `https://www.tinsur.cn/wp-login.php?redirect_to=${backUrl}`;
+                        }
+                    } catch (err) {
+                        // 网络异常、跨域异常，强制跳转登录
+                        const backUrl = encodeURIComponent(window.location.href);
+                        window.location.href = `https://www.tinsur.cn/wp-login.php?redirect_to=${backUrl}`;
+                    }
+                })
+            },
+            // 插件2：原有备案页脚渲染插件
             function (hook) {
                 hook.doneEach(() => addIcpFooter());
             }
