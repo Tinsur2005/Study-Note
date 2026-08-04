@@ -254,6 +254,28 @@ SpringBoot 项目标准开发架构，职责分离、解耦代码，便于维护
 
 IOC（Inversion of Control，控制反转）：**将对象的创建、管理、销毁权限，从开发者代码中转移到 Spring 容器**，彻底摒弃手动 new 对象的方式。
 
+```text
+           浏览器
+             ↓↑
+┌──────────────────────────┐
+│表现层(Servlet、Controller)│  ← StudentController
+└──────────────────────────┘
+             ↓↑
+    ┌──────────────┐
+    │逻辑层(Service)│  ← IStudentService、StudentServiceImpl
+    └───────┬──────┘
+            ↓↑
+    ┌──────────────┐
+    │数据访问层(Dao)│  ← IStudentDao、StudentDaoImpl、StudentMapper
+    └───────┬──────┘
+            ↓↑
+        ┌───────┐
+        │  DB   │
+        └───────┘
+```
+
+
+
 **2. 正转和反转**
 
 - **控制正转（传统开发）**：开发者手动 new 对象，主动控制对象创建，代码耦合度极高。
