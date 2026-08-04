@@ -63,28 +63,8 @@
             }
         };
 
-        // 合并插件数组：【WP登录拦截插件】 + 原有备案页脚插件
+        // 注册插件，放在配置下方更规范
         window.$docsify.plugins = [
-            // 插件1：WP登录状态前置拦截
-            function (hook, vm) {
-                hook.beforeMount(async function () {
-                    const apiUrl = "https://www.tinsur.cn/auth-check";
-                    try {
-                        const res = await fetch(apiUrl, { credentials: "include" });
-                        const data = await res.json();
-                        // 未登录，跳转WP登录页，登录成功自动返回当前笔记页面
-                        if (data.status !== 1) {
-                            const backUrl = encodeURIComponent(window.location.href);
-                            window.location.href = `https://www.tinsur.cn/wp-login.php?redirect_to=${backUrl}`;
-                        }
-                    } catch (err) {
-                        // 网络异常、跨域异常，强制跳转登录
-                        const backUrl = encodeURIComponent(window.location.href);
-                        window.location.href = `https://www.tinsur.cn/wp-login.php?redirect_to=${backUrl}`;
-                    }
-                })
-            },
-            // 插件2：原有备案页脚渲染插件
             function (hook) {
                 hook.doneEach(() => addIcpFooter());
             }
