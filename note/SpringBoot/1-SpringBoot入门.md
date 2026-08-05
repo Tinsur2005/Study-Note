@@ -203,7 +203,7 @@ spring.mvc.static-path-pattern=/static/**
 
 # 4. MyBatis 全局配置
 # 实体类包别名扫描
-mybatis.type-aliases-package=com.situ.springboot.pojo
+mybatis.type-aliases-package=cn.tinsur.springboot.pojo
 # Mapper XML 文件路径扫描
 mybatis.mapper-locations=classpath:mapper/*Mapper.xml
 # 开启驼峰命名自动转换（数据库下划线 → 实体类驼峰）
