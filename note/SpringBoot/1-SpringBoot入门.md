@@ -1,3 +1,5 @@
+# SpringBoot
+
 ## 一、SpringBoot 简介
 
 ### 1.1 传统 Spring 开发的缺点
@@ -214,6 +216,8 @@ mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
 
 MyBatis 数据库 SQL 映射文件，存放数据查询、增删改查语句。
 
+> 在Mabytis中，**参数是可以不用写的**，返回值必须要写
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
@@ -274,8 +278,6 @@ IOC（Inversion of Control，控制反转）：**将对象的创建、管理、�
         └───────┘
 ```
 
-
-
 **2. 正转和反转**
 
 - **控制正转（传统开发）**：开发者手动 new 对象，主动控制对象创建，代码耦合度极高。
@@ -300,6 +302,18 @@ DI（Dependency Injection，依赖注入）：**Spring 容器创建好对象后�
 
 IOC 解决 **对象创建问题**，DI 解决 **对象依赖关系赋值问题**，**先有 IOC，再有 DI**。
 
+```java
+@Mapper   //依赖注入
+public interface StudentMapper {
+    List<Student> selectAll();
+}
+```
+
+```java
+@Autowired	//取出对象
+private StudentMapper studentMapper;
+```
+
 ### 4.3 IOC+DI 最终效果
 
 三层架构彻底解耦：
@@ -307,6 +321,14 @@ IOC 解决 **对象创建问题**，DI 解决 **对象依赖关系赋值问题**
 - Controller 层只依赖 Service 接口，不依赖具体实现类
 - Service 层只依赖 Dao 接口，不依赖具体实现类
 - 所有对象由 Spring 容器统一管理、自动注入
+
+> :warning:**注意：**
+>
+> ​	@Component 是new对象放到容器中
+>
+> ​	@Controller、@Service、@Repository new对象放到Spring容器中
+>
+> ​	和@Component功能一样，就是@Component的别名，主要是为了区分三层架构不同的层
 
 ## 五、MVC 模式与 Thymeleaf 模板引擎
 
@@ -399,19 +421,21 @@ public String selectAll(Model model) {
     <title>登录</title>
 </head>
 <body>
-
-<div th:if="${errorMsg}" th:text="${errorMsg}" style="color:red;"></div>
-<form id="loginForm" method="get" action="/user/login">
-    <label for="name">用户名</label>
-    <input type="text" id="name" name="name"
-           placeholder="请输入用户名" required autofocus/>
-    <br>
-    <label for="password">密码</label>
-    <input type="password" id="password" name="password"
-           placeholder="请输入密码" required/>
-    <br>
-    <input type="submit" value="登录"/>
-</form>
+	<!-- 获取model内的数据 -->
+    <div th:if="${errorMsg}" th:text="${errorMsg}" style="color:red;"></div>
+    <!-- 获取session内的数据 -->
+	<div th:if="${session.errorMsg}" th:text="${session.errorMsg}" style="color:red;"></div>
+    <form id="loginForm" method="get" action="/user/login">
+        <label for="name">用户名</label>
+        <input type="text" id="name" name="name"
+               placeholder="请输入用户名" required autofocus/>
+        <br>
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password"
+               placeholder="请输入密码" required/>
+        <br>
+        <input type="submit" value="登录"/>
+    </form>
 </body>
 </html>
 ```
@@ -458,262 +482,14 @@ public class UserController {
 - **安全性**：二者均为明文传输，不安全；GET 参数暴露在地址栏，更容易泄露敏感信息，生产环境需用 HTTPS 加密。
 - **缓存特性**：GET 请求可被浏览器缓存；POST 请求默认不缓存。
 
-### 6.4 转发 Forward vs 重定向 Redirect
+### 6.4 转发（Forward）和重定向（Redirect）
 
-| 对比项   | 转发（Forward）    | 重定向（Redirect）             |
-| :------- | :----------------- | :----------------------------- |
-| 发起方   | 服务器内部完成     | 服务器通知浏览器重新请求       |
-| 请求次数 | 1 次请求           | 2 次请求                       |
-| URL 地址 | 浏览器地址不变     | 浏览器地址更新                 |
-| 数据共享 | 共享 Request 数据  | Request 数据丢失               |
-| 性能     | 速度快，无二次请求 | 速度稍慢，需要二次请求         |
-| 使用场景 | 页面跳转、数据回显 | 登录成功跳转、防止表单重复提交 |
-
-## 七、会话技术 Cookie 与 Session
-
-### 7.1 核心概念
-
-HTTP 协议是**无状态协议**，无法记录用户访问状态，会话技术用于保存用户会话信息，实现登录状态保持、用户识别。
-
-- **Cookie**：客户端会话技术，数据存储在浏览器本地。
-- **Session**：服务端会话技术，数据存储在服务器内存中。
-
-### 7.2 Cookie 与 Session 对比
-
-| 对比项         | Cookie                               | Session                          |
-| :------------- | :----------------------------------- | :------------------------------- |
-| 存储位置       | 浏览器客户端                         | 服务器端                         |
-| 存储数据       | 仅字符串、4KB 小容量                 | 可存对象、大容量                 |
-| 安全性         | 低，可被查看、篡改、手动清除         | 高，数据存在服务器               |
-| 服务器资源占用 | 不占用                               | 占用，用户越多压力越大           |
-| 生命周期       | 可自定义过期时间，默认关闭浏览器失效 | 默认 30 分钟超时，服务器重启失效 |
-| 典型场景       | 记住用户名、自动登录、偏好设置       | 登录状态、权限控制、用户信息存储 |
-
-### 7.3 Cookie 实战代码
-
-```java
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.CookieValue;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-// 设置 Cookie
-@RequestMapping("/setCookie")
-public void setCookie(HttpServletResponse response) {
-    Cookie cookie = new Cookie("goods", "IPhone");
-    cookie.setPath("/"); // 全局生效
-    cookie.setMaxAge(60 * 60); // 有效期1小时
-    response.addCookie(cookie);
-}
-
-// 方式1：遍历获取 Cookie
-@RequestMapping("/getCookie1")
-@ResponseBody
-public String getCookie1(HttpServletRequest request) {
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            System.out.println(cookie.getName() + ":" + cookie.getValue());
-        }
-    }
-    return "Cookie 获取成功";
-}
-
-// 方式2：注解精准获取 Cookie
-@RequestMapping("/getCookie2")
-@ResponseBody
-public String getCookie2(@CookieValue("goods") String goods) {
-    System.out.println("获取 Cookie：" + goods);
-    return "精准获取 Cookie 成功";
-}
-```
-
-### 7.4 Session 登录状态保存实战
-
-```java
-import javax.servlet.http.HttpSession;
-
-@RequestMapping("/login")
-public String login(String name, String password, Model model, HttpSession session) {
-    User user = userService.login(name, password);
-    if (ObjectUtils.isEmpty(user)) {
-        model.addAttribute("errorMsg", "用户名或密码错误");
-        return "login";
-    }
-    // 登录成功，将用户信息存入 Session，保存登录状态
-    session.setAttribute("user", user);
-    return "redirect:/student/selectAll";
-}
-```
-
-## 八、登录拦截器
-
-### 8.1 拦截器作用
-
-拦截所有浏览器请求，**在控制器执行前进行拦截校验**，实现登录权限控制、请求过滤、日志记录等功能，未登录用户禁止访问后台资源。
-
-### 8.2 自定义登录拦截器
-
-```java
-import org.springframework.web.servlet.HandlerInterceptor;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-// 自定义登录拦截器
-public class LoginInterceptor implements HandlerInterceptor {
-
-    // 控制器执行前拦截
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // 获取 Session 中的登录用户
-        HttpSession session = request.getSession();
-        Object user = session.getAttribute("user");
-
-        // 未登录：跳转登录页，拦截请求
-        if (user == null) {
-            response.sendRedirect("/user/toLogin");
-            return false;
-        }
-        // 已登录：放行请求
-        return true;
-    }
-}
-```
-
-### 8.3 拦截器全局配置
-
-通过 `WebMvcConfigurer` 注册拦截器，设置拦截规则、放行静态资源和登录接口。
-
-```java
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-// 全局配置类，替代 XML 配置
-@Configuration
-public class WebConfig implements WebMvcConfigurer {
-
-    // 注册拦截器
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/**") // 拦截所有请求
-                // 放行登录相关接口、静态资源
-                .excludePathPatterns("/user/toLogin", "/user/login", "/static/**");
-    }
-
-    // 自定义 Bean 示例
-    @Bean
-    public Student createStudent() {
-        return new Student();
-    }
-}
-```
-
-## 九、Ajax
-
-### 9.1 什么是 Ajax
-
-Ajax 全称：**Asynchronous JavaScript and XML（异步 JS 和 XML）**，是一种可以与服务器进行**异步/同步数据交互**的前端技术。
-
-Ajax 的语言载体是 JavaScript，核心最大特点：**异步请求、局部刷新**，无需刷新整个页面，仅更新页面局部数据，极大提升用户体验。
-
-补充概念：synchronized 代表同步，与 Ajax 异步特性相对。
-
-### 9.2 同步与异步请求区别
-
-**1. 同步请求**
-
-通俗理解：你传输数据，我全程等待，必须等你传输完成，我才能做其他事情。
-
-专业解释：浏览器向服务器发送请求后，页面会**阻塞锁定**，在服务器处理请求、返回响应的整个过程中，浏览器无法执行任何其他操作，只能等待请求结束后，页面才能继续交互。
-
-**2. 异步请求**
-
-通俗理解：你后台传输数据，我正常操作页面，你传输完成后再通知我结果。
-
-专业解释：浏览器发送请求后，**页面不会阻塞**，用户可正常操作页面、点击、输入内容，服务器在后台独立处理请求，处理完成后主动回调前端，更新页面数据。
-
-**异步交互核心优势**：可以在不重新加载整个页面的前提下，与服务器交换数据、更新网页局部内容。
-
-### 9.3 Axios 工具介绍
-
-原生 Ajax 语法繁琐、代码冗余、兼容性差，开发效率低。为了简化异步请求开发，我们使用 **Axios** 工具。
-
-Axios 是对原生 AJAX 的**二次封装**，大幅简化异步请求代码，语法简洁、兼容性强、支持 Promise 语法，是目前前端主流的 HTTP 请求工具。
-
-Axios 官方地址：https://www.axios-http.cn
-
-### 9.4 Axios 异步登录完整实战代码
-
-实现表单阻止默认刷新、获取表单参数、Axios 异步提交登录请求，根据后端响应结果跳转页面或弹窗提示。
-
-```html
-<!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Axios 异步登录</title>
-</head>
-<body>
-<!-- 登录表单 -->
-<form id="loginForm">
-    <label for="name">用户名</label>
-    <input type="text" id="name" name="name"
-           placeholder="请输入用户名" required autofocus/>
-    <br>
-    <label for="password">密码</label>
-    <input type="password" id="password" name="password"
-           placeholder="请输入密码" required/>
-    <br>
-    <input type="submit" value="登录"/>
-</form>
-
-<!-- 引入 Axios 在线 CDN 资源 -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-    // 绑定表单提交事件
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
-        // 阻止表单默认刷新提交行为，实现异步请求
-        e.preventDefault();
-        // 获取表单输入数据
-        var name = document.getElementById('name').value;
-        var password = document.getElementById('password').value;
-
-        // 封装请求参数，自动适配表单提交格式
-        var params = new URLSearchParams();
-        params.append('name', name);
-        params.append('password', password);
-
-        // 发送 POST 异步登录请求
-        axios.post('/user/login', params)
-            .then(function (resp) {
-                // 获取后端响应数据
-                var res = resp.data;
-                // 登录成功：跳转学生列表页面
-                if (res.code === 1) {
-                    location.href = '/student/selectAll';
-                } else {
-                    // 登录失败：弹窗提示错误信息
-                    alert(res.msg);
-                }
-            }).catch(function (err) {
-                // 网络/请求异常捕获
-                alert('请求失败，请稍后重试');
-            });
-    });
-</script>
-</body>
-</html>
-```
-
-### 代码核心说明
-
-- **e.preventDefault()：**阻止表单默认整页刷新提交，是异步请求必备配置。
-- **URLSearchParams：**自动将参数封装为表单默认的 `application/x-www-form-urlencoded` 格式，后端可直接通过形参接收数据，无需额外解析。
-- **then 回调：**请求成功后执行，处理正常业务逻辑（页面跳转、提示信息）。
-- **catch 回调：**捕获网络异常、接口报错等问题，统一异常提示。
+| 对比项         | 转发（Forward）    | 重定向（Redirect）             |
+| :------------- | :----------------- | :----------------------------- |
+| 发起方         | 服务器内部完成     | 服务器通知浏览器重新请求       |
+| 请求次数       | 1 次请求，1 次响应 | 2 次请求，2 次响应             |
+| URL 地址       | ❌浏览器地址不变    | ✅浏览器地址更新                |
+| 浏览器是否知道 | ❌不知道            | ✅知道                          |
+| 数据共享       | 共享 Request 数据  | Request 数据丢失               |
+| 性能           | 速度快，无二次请求 | 速度稍慢，需要二次请求         |
+| 使用场景       | 页面跳转、数据回显 | 登录成功跳转、防止表单重复提交 |
