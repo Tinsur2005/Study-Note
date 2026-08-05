@@ -351,11 +351,11 @@ MVC（Model-View-Controller）分层开发模式，是 Web 项目标准架构：
 
 ### 5.3 Thymeleaf 模板引擎
 
-**1. 简介**
+#### 1. 简介
 
 Thymeleaf 是 SpringBoot 官方推荐的服务端模板引擎，替代传统 JSP，支持 HTML 原型开发，可直接在浏览器打开预览，无需服务器。
 
-**2. 核心依赖**
+#### 2.核心依赖
 
 ```xml
 <!-- Thymeleaf 模板引擎依赖 -->
@@ -365,7 +365,7 @@ Thymeleaf 是 SpringBoot 官方推荐的服务端模板引擎，替代传统 JSP
 </dependency>
 ```
 
-**3. 控制器视图跳转代码**
+#### 3.控制器视图跳转代码
 
 ```java
 // 返回视图页面，携带数据到前端
@@ -379,7 +379,9 @@ public String selectAll(Model model) {
 }
 ```
 
-**4.HTML页面源码**
+#### 4.HTML页面源码
+
+> 应该新建一个 `student_list.html` ，所有的HTML都应该放在 `References` 下的`templates` 文件夹中
 
 ```html
 <!DOCTYPE html>
