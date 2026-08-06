@@ -50,7 +50,7 @@ Ajax 核心作用：在**不刷新整个网页**的前提下，实现浏览器�
 - 优点：非阻塞、页面流畅、用户体验好、效率高
 - 缺点：请求执行顺序不可控，多请求并发时需处理数据覆盖问题
 
-### 2.3 核心对比总结
+### 2.3 总结
 
 Ajax 主流使用**异步请求**，这也是现代前端页面流畅交互的核心基础；同步请求仅用于极少数需要强制顺序执行的特殊场景。
 
@@ -105,13 +105,11 @@ axios.post('请求地址', 请求参数)
 })
 ```
 
-## 四、Axios 实战案例（SpringBoot 登录交互）
-
-### 4.1 案例功能说明
+## 四、登录操作
 
 实现登录表单**无刷新异步提交**，通过 Axios 发送 POST 请求与 SpringBoot 后端交互，根据后端返回结果，动态实现页面跳转或弹窗提示，全程不刷新整页。
 
-### 4.2 完整前端代码
+### 4.1 前端
 
 ```html
 <!-- 登录表单页面 -->
@@ -167,17 +165,326 @@ axios.post('请求地址', 请求参数)
 </script>
 ```
 
-### 4.3 核心代码逐行解析
+### 4.2 后端
 
-- **e.preventDefault()**：阻止表单默认的整页刷新提交行为，是实现 Ajax 局部无刷新交互的核心，不添加该代码会导致异步请求失效。
-- **URLSearchParams**：参数格式化工具，自动将键值对参数转为后端可识别的 `application/x-www-form-urlencoded` 格式，适配 SpringBoot 普通参数、实体类参数接收。
-- **axios.post(地址, 参数)**：发送 POST 异步请求，第一个参数为后端接口地址，第二个参数为请求参数。
-- **then() 成功回调**：服务器正常响应后执行，通过 `resp.data` 获取后端返回的 JSON 数据，执行业务逻辑。
-- **catch() 异常回调**：捕获网络中断、接口404、服务器500等异常，统一做错误提示，提升容错性。
+```java
+@RequestMapping(value = "/login", method = {RequestMethod.POST})
+@ResponseBody
+public Result login(String name, String password,HttpSession session){
+    Result result = new Result();
+    User user = userService.login(name,password);
+    if(user == null){
+        //result.setCode(Result.ERROR);
+        //result.setMsg("用户名或密码错误");
+        //return result;
+        return Result.error("用户名或密码错误");
+    }else {
+        session.setAttribute("user",user);
+        //result.setCode(Result.OK);
+        //result.setMsg("登录成功");
+        //return result;
+        return Result.ok("登录成功");
+    }
+}
+```
 
-## 五、补充开发注意事项
+### 4.3 后端工具类
 
-- Axios 所有请求均为**异步执行**，后续依赖接口返回数据的逻辑，必须写在 then 回调内部，否则会出现数据未获取到就执行代码的问题。
-- SpringBoot 后端接口无需跳转页面，只需返回 JSON 格式结果（code 状态码、msg 提示信息、data 数据），由前端控制页面跳转和提示。
-- CDN 引入 Axios 依赖网络，离线开发可下载 `axios.min.js` 本地引入，避免资源加载失败。
-- 异步请求不会携带页面默认缓存，登录等场景需注意后端 Session、Token 校验配置。
+新建一个包 `util` ，写入 `Result` 工具类：
+
+```java
+package cn.tinsur.springboot.util;
+// 请求是成功还是失败：ok error
+// 后台希望前台弹出消息：msg
+// 后台返回前台数据：Data
+// JSON格式的通用响应对象，封装的就是后台返回给前台的所有信息
+public class Result<T> {
+    public static final int ERROR = 0;
+    public static final int OK = 1;
+
+    // 当前状态（程序员判断状态）:成功、失败、未登录、没有权限
+    // 当前登录是成功还是失败要告诉前台，前台才能知道弹出的提示框用errorMsg、okMsg
+    private Integer code;
+    // 描述信息（主要是给用户看的提示信息）
+    private String msg;
+    // 后台返回给前端的数据 Object， User、List<User>、Map
+    private T data;
+
+
+    public Result() {
+    }
+    
+    public Result(Integer code) {
+       this.code = code;
+    }
+
+    public Result(Integer code, String msg) {
+       this.code = code;
+       this.msg = msg;
+    }
+    
+    public Result(Integer code, T data) {
+       this.code = code;
+       this.data = data;
+    }
+
+    public Result(Integer code, String msg, T data) {
+       this.code = code;
+       this.msg = msg;
+       this.data = data;
+    }
+    
+    // 告诉前台成功：code
+    public static Result ok() {
+       return new Result(OK);
+    }
+    
+    // 告诉前台成功：code、msg
+    public static Result ok(String msg) {
+       return new Result(OK, msg);
+    }
+    
+    // 告诉前台成功：code、data
+    public static Result ok(Object data) {
+       return new Result(OK, data);
+    }
+    
+    // 告诉前台成功：code、msg、data
+    public static Result ok(String msg, Object data) {
+       return new Result(OK, msg, data);
+    }
+    
+
+    // 告诉前台成功：code
+    public static Result error() {
+       return new Result(ERROR);
+    }
+    
+    // 告诉前台成功：code、msg
+    public static Result error(String msg) {
+       return new Result(ERROR, msg);
+    }
+
+    public Integer getCode() {
+       return code;
+    }
+
+    public void setCode(Integer code) {
+       this.code = code;
+    }
+
+    public String getMsg() {
+       return msg;
+    }
+
+    public void setMsg(String msg) {
+       this.msg = msg;
+    }
+
+    public T getData() {
+       return data;
+    }
+
+    public void setData(T data) {
+       this.data = data;
+    }
+    
+}
+```
+
+## 五、Axios四大请求方式（RESTful 规范）
+
+### 4.1 基础语法对照表
+
+| 请求方法                          | 用途     | 完整语法      | 参数说明                              |
+| :-------------------------------- | :------- | :------------ | :------------------------------------ |
+| axios.get(url[, config])          | 查询数据 | 查列表 / 单条 | 无请求体 data，参数放 config.params   |
+| axios.delete(url[, config])       | 删除数据 | 删除记录      | 无请求体 data，参数放 config.params   |
+| axios.post(url[, data[, config]]) | 新增数据 | 添加记录      | data 为请求体 body，传递表单 / JSON   |
+| axios.put(url[, data[, config]])  | 更新数据 | 修改记录      | data 为请求体 body，传递完整实体 JSON |
+
+重点区分：
+
+1. `get/delete` **没有第二个 data 参数**，参数只能通过`config.params`拼接在 URL；
+2. `post/put` 第二个参数是`data`，存请求体 body 数据。
+
+### 4.2 Axios 的 config
+
+**Axios 的 config 理解成请求配置对象，里面放的是请求控制信息：**
+
+```json
+{
+    params: {},       // URL参数
+    headers: {},      // 请求头
+    timeout: 5000,    // 超时
+}
+```
+
+### 4.3 请求体 data 两种主流格式
+
+请求体格式由前端传递的数据类型决定，SpringBoot 接收方式不同：
+
+#### 1. 表单格式
+
+即`application/x-www-form-urlencoded`，**上文中的登录功能即使用表单格式进行请求**。
+
+- 来源：原生 HTML form 表单默认格式；
+- 前端构造：`new URLSearchParams()` 拼接键值对；
+- 数据格式：`name=张三&age=23&gender=男`；
+- 后端接收：直接定义普通参数 `String name, Integer age`。
+
+#### 2. JSON
+
+即`application/json`，前后端分离主流方式
+
+- 来源：直接传递 JS 普通对象，Axios 自动执行`JSON.stringify`；
+- 数据格式：`{"name":"张三","age":23,"gender":"男"}`；
+- 后端接收：必须添加注解 `@RequestBody 实体类`。
+
+下面使用第二种方式来实现上面的登录功能：
+
+##### 前端实现
+
+前端相对于上文中的使用表单格式进行请求的前端HTML，:warning:**仅有对params进行赋值有区别**：
+
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:if="${session.errorMsg}" th:text="${session.errorMsg}" style="color:red;"></div>
+    <form id="loginForm" >
+        <label for="name">用户名</label>
+        <input type="text" id="name" name="name"
+               placeholder="请输入用户名" required autofocus/>
+        <br>
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password"
+               placeholder="请输入密码" required/>
+        <br>
+        <input type="submit" value="登录"/>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            let name = document.getElementById("name").value;
+            let password = document.getElementById("password").value;
+
+            let params = {//仅仅在这里有区别
+                name: name,
+                password: password
+            }
+            axios.post("/user/login", params).then(function (resp){
+                let response = resp.data;
+                if(response.code === 1){
+                    alert(response.msg)
+                    window.location.href = "/student/selectAll";
+                } else {
+                    alert(response.msg)
+                }
+            }).catch(function (error) {
+                console.log(error);
+                alert("出现错误")
+            })
+
+        })
+    </script>
+</body>
+</html>
+```
+
+##### 后端实现
+
+:warning:**后端实现要注意login方法的参数变化**
+
+```java
+@RequestMapping(value = "/login", method = {RequestMethod.POST})
+@ResponseBody
+public Result login(@RequestBody User loginUser, HttpSession session){
+    User user = userService.login(loginUser.getName(),loginUser.getPassword());
+    if(user == null){
+        return Result.error("用户名或密码错误");
+    }else {
+        session.setAttribute("user",user);
+        return Result.ok("登录成功");
+    }
+}
+```
+
+## 六、删除操作
+
+### 6.1 前端
+
+修改展示学生列表的前端页面，在表格添加一列`操作`，并在每一行添加删除按钮：
+
+```java
+<body>
+    <a href="/student/toAdd" class="btn btn-primary btn-sm">添加学生</a>
+    <table class="table table-striped table-bordered table-hover table-condensed">
+        <tr>
+            <td>ID</td>
+            <td>名字</td>
+            <td>年龄</td>
+            <td>性别</td>
+            <td>操作</td>
+        </tr>
+        <tr th:each="student:${list}">
+            <td th:text="${student.id}">1</td>
+            <td th:text="${student.name}">zhangsan</td>
+            <td th:text="${student.age}">23</td>
+            <td th:text="${student.gender}">男</td>
+            <td>
+                <a class="btn btn-primary btn-sm" th:href="@{|/student/toUpdate?id=${student.id}|}">编辑</a>
+                <button type="button" class="btn btn-danger btn-sm"
+                        th:onclick="|deleteById(${student.id})|">删除</button>
+            </td>
+        </tr>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // axios.delete 的第二个参数是 config，用 { params: {...} } 作为 query 参数发送
+        function deleteById(id) {
+            let isDelete = confirm('确定要删除这条记录吗？');
+            if (!isDelete) {
+                return;
+            }
+            axios.delete('/student/deleteById', { params: { id: id } }).then(function (resp) {
+                let result = resp.data;
+                // Result.OK=1 成功，Result.ERROR=0 失败
+                if (result.code == 1) {
+                    alert(result.msg);
+                    location.href = '/student/selectAll';
+                } else {
+                    alert(result.msg);
+                }
+            }).catch(function (error) {
+                alert('请求失败，请稍后重试');
+            });
+        }
+    </script>
+</body>
+```
+
+### 6.2 后端
+
+在StudentController中新增方法：
+
+```java
+@DeleteMapping("/deleteById")
+@ResponseBody
+public Result deleteById(Integer id){
+    int line = studentService.deleteById(id);
+    if(line != 0){
+        return Result.ok("删除成功");
+    }else {
+        return Result.error("删除失败");
+    }
+}
+```
+
+相应的，也要在Service层创建接口和实现类，在DAO层创建Mapper接口，以及在Mapper映射文件StudentMapper.xml中增加删除的SQL语句，这里不再赘述。
+
