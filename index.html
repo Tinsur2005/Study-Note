@@ -11,8 +11,8 @@
     <!-- 设置浏览器图标 -->
     <link rel="icon" href="https://note.tinsur.cn/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="https://note.tinsur.cn/favicon.ico" type="image/x-icon" />
-    <!-- 文档主题 -->
-    <link rel="stylesheet" href="https://note.tinsur.cn/css/vue.css">
+    <!-- 文档主题 vue.css 替换jsDelivr CDN -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
 
     <!-- 站点统计 -->
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
@@ -70,16 +70,16 @@
             }
         ];
     </script>
-    <!-- docsify的js依赖 -->
-    <script src="https://note.tinsur.cn/js/docsify.min.js"></script>
-    <!-- emoji表情支持（已废弃，保留本地文件不删除，线上无警告） -->
-    <script src="https://note.tinsur.cn/js/emoji.min.js"></script>
-    <!-- 图片放大缩小支持 -->
-    <script src="https://note.tinsur.cn/js/zoom-image.min.js"></script>
-    <!-- 搜索功能支持 -->
-    <script src="https://note.tinsur.cn/js/search.min.js"></script>
-    <!--代码复制按钮-->
-    <script src="https://note.tinsur.cn/js/docsify-copy-code.min.js"></script>
+    <!-- docsify核心JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify@latest/lib/docsify.min.js"></script>
+    <!-- emoji表情CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+    <!-- 图片放大缩放插件CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+    <!-- 搜索插件CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <!-- 代码复制插件CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
 
 
     <!-- 备案号展示 -->
@@ -140,12 +140,12 @@
     </script>
     <!--解除中文编码问题 结束-->
 
-    <!-- prism 全部替换为国内fastly镜像 -->
-    <script src="https://note.tinsur.cn/js/prism-java.min.js"></script>
-    <script src="https://note.tinsur.cn/js/prism-python.min.js"></script>
-    <script src="https://note.tinsur.cn/js/prism-sql.min.js"></script>
-    <script src="https://note.tinsur.cn/js/prism-bash.min.js"></script>
-    <script src="https://note.tinsur.cn/js/prism-json.min.js"></script>
-    <script src="https://note.tinsur.cn/js/prism-php.min.js"></script>
+    <!-- Prism多语言语法高亮 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>
 </body>
 </html>

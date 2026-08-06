@@ -21,6 +21,8 @@
   *  [1-SpringBoot入门.md](note/SpringBoot/1-SpringBoot入门.md) 
   *  [2-Cookie和Session.md](note/SpringBoot/2-Cookie和Session.md) 
   *  [3-拦截器.md](note/SpringBoot/3-拦截器.md) 
+  *  [4-Ajax.md](note/SpringBoot/4-Ajax.md) 
+  *  [5-常用注解总结.md](note/SpringBoot/5-常用注解总结.md) 
 
 
 * 数据库
@@ -30,7 +32,7 @@
   - [1-HTML](note/Web/1-html.md) 
   - [2-CSS](note/Web/2-css.md) 
   - [3-JavaScript](note/Web/3-JavaScript.md) 
-  - [4-JSON](note\Web\4-JSON.md) 
+  - [4-JSON](note/Web/4-JSON.md) 
 * Linux
   *  [1-Linux常见指令](note/Linux/1-Linux常见指令.md) 
   *  [2-Docker入门](note/Linux/2-Docker入门.md) 
