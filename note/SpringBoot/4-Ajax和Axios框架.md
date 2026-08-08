@@ -109,7 +109,7 @@ axios.post('请求地址', 请求参数)
 
 实现登录表单**无刷新异步提交**，通过 Axios 发送 POST 请求与 SpringBoot 后端交互，根据后端返回结果，动态实现页面跳转或弹窗提示，全程不刷新整页。
 
-> 在 [第一节：SpringBoot入门](1-SpringBoot入门.md) 中提到了 `student_list.html` 页面和前后端交互实现在前端展示学生列表，接下来我们在原有学生列表的基础上进行修改。自本节开始逐步将先前的学生列表逐步改造成一个完善的学生管理系统Demo。
+> 在 [第一节：SpringBoot入门](https://note.tinsur.cn/#/note/SpringBoot/1-SpringBoot入门) 中提到了 `student_list.html` 页面和前后端交互实现在前端展示学生列表，接下来我们在原有学生列表的基础上进行修改。自本节开始逐步将先前的学生列表逐步改造成一个完善的学生管理系统Demo。
 
 ### 4.1 前端
 
