@@ -21,8 +21,9 @@
   *  [1-SpringBoot入门.md](note/SpringBoot/1-SpringBoot入门.md) 
   *  [2-Cookie和Session.md](note/SpringBoot/2-Cookie和Session.md) 
   *  [3-拦截器.md](note/SpringBoot/3-拦截器.md) 
-  *  [4-Ajax.md](note/SpringBoot/4-Ajax.md) 
+  *  [4-Ajax和Axios框架.md](note/SpringBoot/4-Ajax和Axios框架.md) 
   *  [5-常用注解总结.md](note/SpringBoot/5-常用注解总结.md) 
+  *  [6-增删改查.md](note/SpringBoot/6-增删改查.md) 
 
 
 * 数据库

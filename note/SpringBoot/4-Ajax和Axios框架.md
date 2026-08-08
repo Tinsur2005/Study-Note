@@ -1,4 +1,4 @@
-# SpringBoot - Ajax
+# SpringBoot：Ajax和Axios框架
 
 ## 一、Ajax 核心概述
 
@@ -108,6 +108,8 @@ axios.post('请求地址', 请求参数)
 ## 四、登录操作
 
 实现登录表单**无刷新异步提交**，通过 Axios 发送 POST 请求与 SpringBoot 后端交互，根据后端返回结果，动态实现页面跳转或弹窗提示，全程不刷新整页。
+
+> 在 [第一节：SpringBoot入门](1-SpringBoot入门.md) 中提到了 `student_list.html` 页面和前后端交互实现在前端展示学生列表，接下来我们在原有学生列表的基础上进行修改。自本节开始逐步将先前的学生列表逐步改造成一个完善的学生管理系统Demo。
 
 ### 4.1 前端
 
@@ -296,12 +298,12 @@ public class Result<T> {
 
 ### 4.1 基础语法对照表
 
-| 请求方法                          | 用途     | 完整语法      | 参数说明                              |
-| :-------------------------------- | :------- | :------------ | :------------------------------------ |
-| axios.get(url[, config])          | 查询数据 | 查列表 / 单条 | 无请求体 data，参数放 config.params   |
-| axios.delete(url[, config])       | 删除数据 | 删除记录      | 无请求体 data，参数放 config.params   |
-| axios.post(url[, data[, config]]) | 新增数据 | 添加记录      | data 为请求体 body，传递表单 / JSON   |
-| axios.put(url[, data[, config]])  | 更新数据 | 修改记录      | data 为请求体 body，传递完整实体 JSON |
+| 请求方法                              | 用途   | 完整语法     | 参数说明                        |
+| :-------------------------------- | :--- | :------- | :-------------------------- |
+| axios.get(url[, config])          | 查询数据 | 查列表 / 单条 | 无请求体 data，参数放 config.params |
+| axios.delete(url[, config])       | 删除数据 | 删除记录     | 无请求体 data，参数放 config.params |
+| axios.post(url[, data[, config]]) | 新增数据 | 添加记录     | data 为请求体 body，传递表单 / JSON  |
+| axios.put(url[, data[, config]])  | 更新数据 | 修改记录     | data 为请求体 body，传递完整实体 JSON  |
 
 重点区分：
 
@@ -414,77 +416,3 @@ public Result login(@RequestBody User loginUser, HttpSession session){
     }
 }
 ```
-
-## 六、删除操作
-
-### 6.1 前端
-
-修改展示学生列表的前端页面，在表格添加一列`操作`，并在每一行添加删除按钮：
-
-```java
-<body>
-    <a href="/student/toAdd" class="btn btn-primary btn-sm">添加学生</a>
-    <table class="table table-striped table-bordered table-hover table-condensed">
-        <tr>
-            <td>ID</td>
-            <td>名字</td>
-            <td>年龄</td>
-            <td>性别</td>
-            <td>操作</td>
-        </tr>
-        <tr th:each="student:${list}">
-            <td th:text="${student.id}">1</td>
-            <td th:text="${student.name}">zhangsan</td>
-            <td th:text="${student.age}">23</td>
-            <td th:text="${student.gender}">男</td>
-            <td>
-                <a class="btn btn-primary btn-sm" th:href="@{|/student/toUpdate?id=${student.id}|}">编辑</a>
-                <button type="button" class="btn btn-danger btn-sm"
-                        th:onclick="|deleteById(${student.id})|">删除</button>
-            </td>
-        </tr>
-    </table>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        // axios.delete 的第二个参数是 config，用 { params: {...} } 作为 query 参数发送
-        function deleteById(id) {
-            let isDelete = confirm('确定要删除这条记录吗？');
-            if (!isDelete) {
-                return;
-            }
-            axios.delete('/student/deleteById', { params: { id: id } }).then(function (resp) {
-                let result = resp.data;
-                // Result.OK=1 成功，Result.ERROR=0 失败
-                if (result.code == 1) {
-                    alert(result.msg);
-                    location.href = '/student/selectAll';
-                } else {
-                    alert(result.msg);
-                }
-            }).catch(function (error) {
-                alert('请求失败，请稍后重试');
-            });
-        }
-    </script>
-</body>
-```
-
-### 6.2 后端
-
-在StudentController中新增方法：
-
-```java
-@DeleteMapping("/deleteById")
-@ResponseBody
-public Result deleteById(Integer id){
-    int line = studentService.deleteById(id);
-    if(line != 0){
-        return Result.ok("删除成功");
-    }else {
-        return Result.error("删除失败");
-    }
-}
-```
-
-相应的，也要在Service层创建接口和实现类，在DAO层创建Mapper接口，以及在Mapper映射文件StudentMapper.xml中增加删除的SQL语句，这里不再赘述。
-
