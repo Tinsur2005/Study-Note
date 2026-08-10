@@ -25,6 +25,7 @@
   *  [5-常用注解总结](note/SpringBoot/5-常用注解总结.md) 
   *  [6-增删改查](note/SpringBoot/6-增删改查.md) 
   *  [7-下拉框动态加载数据↗](https://www.tinsur.cn/892.html)
+  *  [8-HTTP请求和Postman使用.md](note/SpringBoot/8-HTTP请求和Postman使用.md) 
 
 
 * 数据库
