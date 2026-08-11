@@ -29,6 +29,9 @@
   *  [9-MyBatis多表查询](note/SpringBoot/9-MyBatis多表查询.md) 
   *  [10-MyBatis动态SQL](note/SpringBoot/10-MyBatis动态SQL.md) 
   *  [11-SpringAOP、静态代理、动态代理](note/SpringBoot/11-SpringAOP、静态代理、动态代理.md) 
+* Vue
+  * [1-ES6基础](note/Vue/1-ES6基础.md) 
+
 
 
 * 数据库
