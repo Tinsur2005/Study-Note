@@ -27,7 +27,8 @@
   *  [7-下拉框动态加载数据↗](https://www.tinsur.cn/892.html)
   *  [8-HTTP请求和Postman使用](note/SpringBoot/8-HTTP请求和Postman使用.md) 
   *  [9-MyBatis多表查询](note/SpringBoot/9-MyBatis多表查询.md) 
-  *  [10-MyBatis动态SQL.md](note\SpringBoot\10-MyBatis动态SQL.md) 
+  *  [10-MyBatis动态SQL.md](note/SpringBoot/10-MyBatis动态SQL.md) 
+  *  [11-SpringAOP、静态代理、动态代理.md](note/SpringBoot/11-SpringAOP、静态代理、动态代理.md) 
 
 
 * 数据库
